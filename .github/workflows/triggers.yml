@@ -4,10 +4,11 @@ on:
   push:
     branches:
       - master
+      - aprendiendo-github-actions
   pull_request:
     types: [opened, synchronize, reopened]
     paths:
-      - '**.py'
+      - '**.js'
   issues:
     types:
       - labeled
@@ -15,7 +16,7 @@ on:
     inputs:
       lenguaje_favorito:
         description: 'Lenguaje favorito'
-        default: Python
+        default: Javascript
         required: true
         type: choice
         options:
@@ -25,7 +26,7 @@ on:
       nombre:
         description: 'Tu nombre'
         required: true
-        default: Juan
+        default: Daniel
         type: string
   schedule:
     - cron: '16 19 * * *'
@@ -36,7 +37,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Definir nombre
-        run: echo "USERNAME=${{inputs.nombre}}" >> $GITHUB_ENV
+        run: echo "USERNAME=${{ inputs.nombre }}" >> $GITHUB_ENV
+      - name: Definir lenguaje
+        run: echo "LANGUAJE=${{ inputs.lenguaje_favorito }}" >> $GITHUB_ENV
       - name: Correr script
         run: node hola-mundo-manual.js
   hola-mundo:
@@ -46,6 +49,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Definir variable
-        run: echo "USERNAME=${{github.actor}}" >> $GITHUB_ENV
+        run: echo "USERNAME=${{ github.actor }}" >> $GITHUB_ENV
       - name: Correr script
         run: node hola-mundo.js
