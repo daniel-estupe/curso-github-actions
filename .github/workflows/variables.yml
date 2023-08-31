@@ -1,4 +1,5 @@
 name: Saludo usando variables
+run-name: ¡Estoy aprendiendo a usar variables!
 on: 
   worflow_dispatch
 env:
